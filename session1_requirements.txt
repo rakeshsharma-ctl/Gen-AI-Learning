@@ -1,0 +1,165 @@
+# =============================================================================
+# Session 1 — LLM Architecture & Model Behavior
+# Requirements File
+# Technical Intro to Generative AI | McKinsey Audience
+# =============================================================================
+# Lessons covered:
+#   Lesson 1 : From Neural Networks to Transformers        (LU-S1-01 to 04)
+#   Lesson 2 : Context, Throughput, and Model Selection    (LU-S1-05 to 08)
+#   Lesson 3 : Attention Internals & Multi-Head Mechanisms (LU-S1-09 to 12)
+#   Lesson 4 : Parameters and Output Behavior              (LU-S1-13 to 16)
+#   Lesson 5 : Failure Modes & Programmatic Inspection     (LU-S1-17 to 20)
+#   Lab       : Tokenization, Embeddings & Parameter Tuning (LU-S1-21 to 22)
+# =============================================================================
+# Install all dependencies with:
+#   pip install -r session1_requirements.txt
+# =============================================================================
+
+
+# -----------------------------------------------------------------------------
+# SECTION 1 — LLM API CLIENTS
+# Used throughout: API calls, token counting, embeddings, streaming
+# LUs: LU-S1-03, LU-S1-06, LU-S1-07, LU-S1-13, LU-S1-14, LU-S1-17, LU-S1-21, LU-S1-22
+# -----------------------------------------------------------------------------
+
+# OpenAI API client — primary provider used in labs (GPT-4o, embeddings)
+openai>=1.30.0
+
+# Anthropic API client — referenced in model comparison (LU-S1-07, LU-S1-08)
+anthropic>=0.25.0
+
+
+# -----------------------------------------------------------------------------
+# SECTION 2 — TOKENIZATION
+# Used in: LU-S1-03 (trace the token-embedding-attention path)
+#          LU-S1-04 (tokenization-driven failure diagnosis)
+#          LU-S1-21 (Lab: tokenization & embedding exploration)
+# -----------------------------------------------------------------------------
+
+# tiktoken — OpenAI's byte-pair encoding tokenizer
+# Directly referenced in LU-S1-21 Tailoring Notes:
+#   "tiktoken library provides tokenization for OpenAI models"
+tiktoken>=0.7.0
+
+
+# -----------------------------------------------------------------------------
+# SECTION 3 — TRANSFORMERS & OPEN-WEIGHT MODEL SUPPORT
+# Used in: LU-S1-07 (Mistral / open-weight model comparison)
+#          LU-S1-11 (attention visualization on open-weight models)
+#          LU-S1-21 (embedding generation)
+# -----------------------------------------------------------------------------
+
+# Hugging Face Transformers — open-weight model loading, tokenizers, inference
+# Required for Mistral evaluation (LU-S1-07) and attention inspection (LU-S1-11)
+transformers>=4.40.0
+
+# Hugging Face Datasets — loading evaluation datasets for model comparison
+# Used in LU-S1-07 (blind evaluation on representative inputs)
+datasets>=2.19.0
+
+# Accelerate — device-aware model loading for open-weight models (CPU/GPU)
+accelerate>=0.30.0
+
+
+# -----------------------------------------------------------------------------
+# SECTION 4 — ATTENTION VISUALIZATION
+# Used in: LU-S1-11 (interpret self-attention patterns)
+#          LU-S1-12 (apply multi-head attention diagnostics)
+# Directly referenced in LU-S1-11 Tailoring Notes:
+#   "Libraries such as BertViz and transformer-lens expose intermediate
+#    attention weights from open-weight models"
+# -----------------------------------------------------------------------------
+
+# BertViz — interactive attention head visualization for open-weight models
+bertviz>=1.4.0
+
+# TransformerLens — mechanistic interpretability; exposes internal activations
+# and attention weights across transformer layers
+transformer-lens>=1.14.0
+
+# einops — tensor manipulation required by TransformerLens
+einops>=0.7.0
+
+# CircuitsVis — rendering backend for TransformerLens attention visualizations
+circuitsvis>=1.4.1
+
+
+# -----------------------------------------------------------------------------
+# SECTION 5 — NUMERICAL COMPUTING & SCIENTIFIC PYTHON
+# Used in: LU-S1-10 (attention matrix computation demo)
+#          LU-S1-21 (cosine similarity between embedding pairs)
+#          LU-S1-22 (parameter tuning experiments, distribution analysis)
+# -----------------------------------------------------------------------------
+
+# NumPy — matrix operations, attention score computation, cosine similarity
+numpy>=1.26.0
+
+# SciPy — cosine similarity, softmax, statistical analysis of output distributions
+scipy>=1.13.0
+
+
+# -----------------------------------------------------------------------------
+# SECTION 6 — VISUALIZATION & PLOTTING
+# Used in: LU-S1-10 (attention matrix heatmap)
+#          LU-S1-14 (temperature/top-p probability distribution plots)
+#          LU-S1-21 (embedding similarity bar charts)
+#          LU-S1-22 (output variance across parameter settings)
+# -----------------------------------------------------------------------------
+
+# Matplotlib — static plots; attention heatmaps, token distribution charts
+matplotlib>=3.8.0
+
+# Seaborn — statistical visualization; heatmaps for attention weight matrices
+seaborn>=0.13.0
+
+
+# -----------------------------------------------------------------------------
+# SECTION 7 — DATA HANDLING & STRUCTURED OUTPUT
+# Used in: LU-S1-17 (programmatic inspection, structured logging)
+#          LU-S1-18 (output compliance validation)
+#          LU-S1-19 (failure mode logging and sampling)
+#          LU-S1-20 (output inspection pipelines)
+# -----------------------------------------------------------------------------
+
+# Pandas — structured logging DataFrames; token count analysis across batch runs
+pandas>=2.2.0
+
+# Pydantic — schema definition and validation for structured LLM outputs
+# Referenced in LU-S1-18 (format compliance enforcement)
+pydantic>=2.7.0
+
+
+# -----------------------------------------------------------------------------
+# SECTION 8 — NOTEBOOK ENVIRONMENT & UTILITIES
+# Used throughout all lessons and labs
+# -----------------------------------------------------------------------------
+
+# JupyterLab — primary notebook environment for the session
+jupyterlab>=4.1.0
+
+# ipywidgets — interactive widgets for parameter tuning sliders (LU-S1-22)
+ipywidgets>=8.1.0
+
+# tqdm — progress bars for batch evaluation loops (LU-S1-19, LU-S1-20)
+tqdm>=4.66.0
+
+# python-dotenv — load OPENAI_API_KEY / ANTHROPIC_API_KEY from a .env file
+python-dotenv>=1.0.0
+
+
+# =============================================================================
+# QUICK INSTALL (copy-paste into terminal):
+#
+#   pip install -r session1_requirements.txt
+#
+# OPTIONAL — GPU acceleration for open-weight models (Lesson 3, LU-S1-11):
+#   pip install torch --index-url https://download.pytorch.org/whl/cu121
+#   (CPU-only fallback is automatic if CUDA is not available)
+#
+# VERIFY INSTALL:
+#   python -c "import openai, tiktoken, transformers, bertviz, numpy, matplotlib, pydantic; print('All OK')"
+#
+# API KEYS REQUIRED:
+#   export OPENAI_API_KEY="sk-..."          # OpenAI (primary)
+#   export ANTHROPIC_API_KEY="sk-ant-..."   # Anthropic (model comparison, LU-S1-07)
+# =============================================================================
