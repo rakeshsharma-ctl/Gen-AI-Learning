@@ -1,0 +1,83 @@
+# =============================================================================
+# Technical Intro to Generative AI — Python Dependencies
+# =============================================================================
+# Usage: pip install -r requirements.txt
+#
+# Requires Python 3.9 or later.
+# We recommend installing inside a virtual environment:
+#   python3 -m venv genai_env && source genai_env/bin/activate
+#
+# Version pins are provided where specified in course materials.
+# For all others, the latest stable release is used.
+# If you encounter a conflict, try: pip install --upgrade <package>
+# =============================================================================
+
+
+# --- LLM Client & API Access ------------------------------------------------
+# OpenAI Python client for embeddings, chat completions, and function calling
+openai>=1.0.0
+
+# --- LangChain Ecosystem -----------------------------------------------------
+# Core LangChain framework: chains, agents, memory, prompt templates
+langchain>=0.2.0
+
+# LangChain integrations for OpenAI models (ChatOpenAI, OpenAIEmbeddings, etc.)
+langchain-openai>=0.1.0
+
+# LangChain community tools and integrations (web search, document loaders, etc.)
+langchain-community>=0.2.0
+
+
+# --- Vector Store & Similarity Search ----------------------------------------
+# FAISS (CPU-only) for local vector indexing and approximate nearest-neighbour search
+faiss-cpu>=1.7.4
+
+# Optional: Chroma as an alternative lightweight vector store
+# chromadb>=0.4.0
+
+
+# --- Tokenization & Text Utilities -------------------------------------------
+# tiktoken: OpenAI's fast BPE tokenizer — used for token counting and context management
+tiktoken>=0.6.0
+
+# NumPy: Required for embedding arrays and cosine similarity calculations
+numpy>=1.24.0
+
+
+# --- Document Loaders (RAG Track A) ------------------------------------------
+# pypdf: PDF text extraction for corpus ingestion
+pypdf>=3.0.0
+
+# python-docx: DOCX paragraph extraction for corpus ingestion
+python-docx>=1.0.0
+
+# beautifulsoup4: HTML visible-text extraction, strips markup
+beautifulsoup4>=4.12.0
+
+# lxml: HTML/XML parser backend used with BeautifulSoup
+lxml>=4.9.0
+
+
+# --- Data Validation (Agentic Track B) ----------------------------------------
+# Pydantic: Input/output schema validation for LangChain tool definitions
+# Note: LangChain v0.2+ uses Pydantic v2 internally; install v2 explicitly
+pydantic>=2.0.0
+
+
+# --- Credential & Environment Management -------------------------------------
+# python-dotenv: Loads OPENAI_API_KEY and other secrets from a .env file at runtime
+python-dotenv>=1.0.0
+
+
+# --- Jupyter / Interactive Exploration (Sessions 1 & 2) ----------------------
+# Jupyter for running the tokenization and prompt engineering exploration notebooks
+jupyter>=1.0.0
+ipykernel>=6.0.0
+
+
+# --- Utilities ---------------------------------------------------------------
+# requests: HTTP utility used in some tool implementations (Track B)
+requests>=2.31.0
+
+# tqdm: Progress bars for long embedding/ingestion loops
+tqdm>=4.66.0
