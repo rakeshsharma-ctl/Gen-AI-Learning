@@ -199,28 +199,6 @@ The lab section at the end (LU-S2-21 and LU-S2-22) integrates all five lessons i
 
 ---
 
-## Tailoring Notes
-
-The following LUs contain McKinsey-specific language that should be reviewed before delivery to a non-McKinsey audience:
-
-| LU ID | Tailoring Flag |
-|-------|----------------|
-| LU-S2-04 | "McKinsey application," "McKinsey-developed tools," "client deliverable" |
-| LU-S2-08 | "McKinsey technical workflows," "engagement context," "client-facing output" |
-| LU-S2-10 | "LangChain" — confirm against approved orchestration tooling |
-| LU-S2-12 | "LangChain," "McKinsey pipeline" |
-| LU-S2-14 | Vector store product names — confirm against approved infrastructure |
-| LU-S2-15 | "LangChain," "FAISS," "Chroma" — confirm against approved vector infrastructure |
-| LU-S2-16 | "McKinsey technical work" |
-| LU-S2-19 | "LangChain" — confirm against approved agentic frameworks |
-| LU-S2-20 | "McKinsey contexts," "McKinsey engagements," "client-facing" |
-| LU-S2-21 | LangChain and provider API references |
-| LU-S2-22 | "Pydantic," "LangChain output parsers" — confirm against approved Python library set |
-
-In the notebook, tool names (OpenAI, LangChain, FAISS, Pydantic) can be substituted by updating the Setup cell and the import statements in the relevant lesson cells. No structural changes to the exercises or lab are required for a tool substitution.
-
----
-
 ## Connection to the Rest of the Program
 
 **Session 2 builds on Session 1** by taking model behavior knowledge (how transformers process tokens, why attention degrades at long contexts, what temperature controls) and converting it into engineering decisions. The prompt layering work in Lesson 1 applies directly to the parameter selection work in Session 1's Lab. The explanation of why RAG solves a structural attention problem (Lesson 4) is only accessible if participants understand transformer attention from Session 1.
